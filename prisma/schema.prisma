@@ -12,6 +12,7 @@ model User {
   name           String
   cpf            String @unique
   email          String
+  password       String
   created_at     DateTime 
   appoitment     Appointment[]
   gender         Sex
@@ -23,7 +24,7 @@ model Appointment {
   id             Int @id @default(autoincrement())
   startAt        String
   endAt          String
-  userId         String  
+  userId         String
   user           User @relation(fields: [userId], references: [id])
   cut            Cutting?
   dye_hair       DyeHair?
