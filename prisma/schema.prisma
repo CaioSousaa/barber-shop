@@ -21,13 +21,12 @@ model User {
 
 model Appointment {
   id             Int @id @default(autoincrement())
-  startAt        DateTime
-  endAt          DateTime
+  startAt        String
+  endAt          String
   userId         String  
   user           User @relation(fields: [userId], references: [id])
   cut            Cutting?
   dye_hair       DyeHair?
-  nails          String?
   eyebrows       String?
 
   @@map("appointment")
