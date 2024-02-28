@@ -25,6 +25,7 @@ model Appointment {
   startAt        String
   endAt          String
   userId         String
+  payment        Int
   user           User @relation(fields: [userId], references: [id])
   cut            Cutting?
   dye_hair       DyeHair?
