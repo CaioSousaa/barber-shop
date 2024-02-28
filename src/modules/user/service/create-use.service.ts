@@ -4,20 +4,22 @@ import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { UserDto } from '../dto/user-dto';
+import { UserDTO } from '../dto/user-dto';
 import { IHash } from '../providers/hash/contract/IHash';
 import { BctyptHash } from '../providers/hash/implementations/BcryptHash';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from '@prisma/client';
+import { SendEmailNewUser } from 'src/modules/mail/services/send-email-new-user.service';
 
 @Injectable()
 export class CreateUserService {
   constructor(
     private readonly prisma: PrismaService,
     @Inject(BctyptHash) private readonly hashPassword: IHash,
+    private readonly mail: SendEmailNewUser,
   ) {}
 
-  async create({ name, email, password, cpf, gender }: UserDto): Promise<User> {
+  async create({ name, email, password, cpf, gender }: UserDTO): Promise<User> {
     try {
       const cpfInUse = await this.prisma.user.findFirst({ where: { cpf } });
 
@@ -38,7 +40,7 @@ export class CreateUserService {
       const passwordHash: string =
         await this.hashPassword.generateHash(password);
 
-      const createUser = await this.prisma.user.create({
+      const user: User = await this.prisma.user.create({
         data: {
           name,
           cpf,
@@ -49,7 +51,9 @@ export class CreateUserService {
         },
       });
 
-      return createUser;
+      await this.mail.execute({ user });
+
+      return user;
     } catch (error) {
       if (error) throw error;
       throw new InternalServerErrorException('Server error, please try again');

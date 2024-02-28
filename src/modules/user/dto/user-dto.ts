@@ -8,7 +8,7 @@ import {
   Matches,
 } from 'class-validator';
 
-export class UserDto {
+export class UserDTO {
   @IsString({ message: 'this variable name need to be string' })
   @IsNotEmpty()
   @ApiProperty()

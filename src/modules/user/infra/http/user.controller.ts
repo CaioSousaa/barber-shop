@@ -14,7 +14,7 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { UserDto } from '../../dto/user-dto';
+import { UserDTO } from '../../dto/user-dto';
 import { CreateUserService } from '../../service/create-use.service';
 import { ListAllUsers } from '../../service/list-all-users.service';
 import { User } from '@prisma/client';
@@ -35,9 +35,9 @@ export class UserController {
   @Post()
   @UsePipes(ValidationPipe)
   @UseInterceptors(ClassSerializerInterceptor)
-  @ApiBody({ type: UserDto })
-  public async create(@Body() userDto: UserDto): Promise<User> {
-    return this.userService.create(userDto);
+  @ApiBody({ type: UserDTO })
+  public async create(@Body() userDTO: UserDTO): Promise<User> {
+    return this.userService.create(userDTO);
   }
 
   @ApiOkResponse({ status: 201, description: 'The register has been created' })
