@@ -3,7 +3,7 @@ import { IHash } from '../contract/IHash';
 import { hash } from 'bcrypt';
 
 @Injectable()
-export class BctyptHash implements IHash {
+export class BcryptHash implements IHash {
   generateHash(payload: string): Promise<string> {
     return hash(payload, 8);
   }

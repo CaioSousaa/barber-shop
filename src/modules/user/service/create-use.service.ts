@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { UserDTO } from '../dto/user-dto';
 import { IHash } from '../providers/hash/contract/IHash';
-import { BctyptHash } from '../providers/hash/implementations/BcryptHash';
+import { BcryptHash } from '../providers/hash/implementations/BcryptHash';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { User } from '@prisma/client';
 import { SendEmailNewUser } from 'src/modules/mail/services/send-email-new-user.service';
@@ -15,7 +15,7 @@ import { SendEmailNewUser } from 'src/modules/mail/services/send-email-new-user.
 export class CreateUserService {
   constructor(
     private readonly prisma: PrismaService,
-    @Inject(BctyptHash) private readonly hashPassword: IHash,
+    @Inject(BcryptHash) private readonly hashPassword: IHash,
     private readonly mail: SendEmailNewUser,
   ) {}
 
