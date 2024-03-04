@@ -16,7 +16,7 @@ export class CreateSessionUserService {
   constructor(
     @Inject(BcryptHashPassword)
     private readonly hashPassword: IHashPasswordContract,
-    private jtwService: JwtService,
+    private jwtService: JwtService,
     private readonly prisma: PrismaService,
   ) {}
   async create({ cpf, password }: CreateSessionUserDTO): Promise<string> {
@@ -35,7 +35,8 @@ export class CreateSessionUserService {
           'the password passed does not match the user',
         );
       }
-      return this.jtwService.sign({
+
+      return this.jwtService.sign({
         id: user.id,
         name: user.name,
         email: user.email,
