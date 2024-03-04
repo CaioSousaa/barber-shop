@@ -5,6 +5,7 @@ import { CreateUserService } from './service/create-use.service';
 import { ListAllUsers } from './service/list-all-users.service';
 import { BcryptHash } from './providers/hash/implementations/BcryptHash';
 import { SendEmailNewUser } from '../mail/services/send-email-new-user.service';
+import { DeleteUserService } from './service/delete-user.service';
 
 @Module({
   controllers: [UserController],
@@ -14,6 +15,7 @@ import { SendEmailNewUser } from '../mail/services/send-email-new-user.service';
     BcryptHash,
     ListAllUsers,
     SendEmailNewUser,
+    DeleteUserService,
   ],
 })
 export class UserModule {}
