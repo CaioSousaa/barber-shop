@@ -5,6 +5,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   UseInterceptors,
   UsePipes,
@@ -17,10 +18,12 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { UserDTO } from '../../dto/user-dto';
-import { CreateUserService } from '../../service/create-use.service';
+import { CreateUserService } from '../../service/create-user.service';
 import { ListAllUsers } from '../../service/list-all-users.service';
 import { DeleteUserService } from '../../service/delete-user.service';
 import { User } from '@prisma/client';
+import { UpdatUserDTO } from '../../dto/update-user-dto';
+import { UpdateUserService } from '../../service/update-user.service';
 
 @ApiTags('user')
 @Controller('user')
@@ -29,6 +32,7 @@ export class UserController {
     private readonly userService: CreateUserService,
     private readonly listAll: ListAllUsers,
     private readonly deleteUser: DeleteUserService,
+    private readonly updateUser: UpdateUserService,
   ) {}
 
   @ApiOkResponse({ status: 201, description: 'The user has been created' })
@@ -62,5 +66,21 @@ export class UserController {
   @Delete(':id')
   public async delete(@Param('id') id: string) {
     return this.deleteUser.execute(id);
+  }
+
+  @ApiOkResponse({ status: 200, description: 'update client with success' })
+  @ApiBadRequestResponse({
+    status: 400,
+    description: 'Unable to update client',
+  })
+  @Patch(':id')
+  @UsePipes(ValidationPipe)
+  @UseInterceptors(ClassSerializerInterceptor)
+  @ApiBody({ type: UpdatUserDTO })
+  public async update(
+    @Param('id') id: string,
+    @Body() updateDTO: UpdatUserDTO,
+  ): Promise<User> {
+    return this.updateUser.update(id, updateDTO);
   }
 }
