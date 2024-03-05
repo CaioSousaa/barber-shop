@@ -53,6 +53,8 @@ export class CreateUserService {
 
       await this.mail.execute({ user });
 
+      delete user.password;
+
       return user;
     } catch (error) {
       if (error) throw error;
