@@ -8,6 +8,10 @@ export class ListAllUsers {
     try {
       const findAllUsers = await this.prisma.user.findMany();
 
+      findAllUsers.forEach((user) => {
+        delete user.password;
+      });
+
       return findAllUsers;
     } catch (error) {
       if (error) throw error;
