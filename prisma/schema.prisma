@@ -14,6 +14,7 @@ model User {
   email          String
   password       String
   created_at     DateTime 
+  usersToken     TokenUser[]
   appoitment     Appointment[]
   gender         Sex
 
@@ -32,6 +33,21 @@ model Appointment {
   eyebrows       String?
 
   @@map("appointment")
+}
+
+model TokenUser{
+  id            String  @id @default(uuid())
+  token         String  @default(uuid())
+  used          Boolean @default(false)
+  used_in       DateTime?
+  expires_in    DateTime?
+  created_at    DateTime @default(now())
+  update_at     DateTime @updatedAt
+
+  user_id       String
+  user          User @relation(fields: [user_id], references: [id] )
+
+  @@map("tokenuser")
 }
 
 enum DyeHair {
