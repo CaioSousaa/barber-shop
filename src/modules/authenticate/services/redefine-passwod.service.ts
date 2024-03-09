@@ -33,7 +33,7 @@ export class RedefinePasswordService {
         });
 
       if (!tokenRedefinePassword) {
-        throw new NotFoundException('this token does not exists in database');
+        throw new NotFoundException('token does not exists in database');
       }
 
       const user: User = await this.prisma.user.findFirst({
