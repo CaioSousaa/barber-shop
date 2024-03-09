@@ -7,6 +7,8 @@ import { secret, expiresIn } from 'src/config/jtw/config.jwt';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SendTokenRecoveryPasswordService } from './services/send-token-recovery-password.service';
 import { SendEmailTokenRecoveryPasswordUserService } from '../mail/services/send-email-token-recovery-password.service';
+import { RedefinePasswordService } from './services/redefine-passwod.service';
+import { SendEmailSucessRecoveryPassord } from 'src/modules/mail/services/send-email-sucess-recovery-password';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { SendEmailTokenRecoveryPasswordUserService } from '../mail/services/send
     PrismaService,
     SendEmailTokenRecoveryPasswordUserService,
     SendTokenRecoveryPasswordService,
+    RedefinePasswordService,
+    SendEmailSucessRecoveryPassord,
   ],
 })
 export class AuthModule {}

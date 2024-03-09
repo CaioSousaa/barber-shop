@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { SendEmailNewUser } from './services/send-email-new-user.service';
 import { SendTokenRecoveryPasswordDTO } from '../authenticate/dto/send-token-recovery-password-dto';
+import { SendEmailSucessRecoveryPassord } from './services/send-email-sucess-recovery-password';
 
 @Module({
   imports: [
@@ -15,7 +16,15 @@ import { SendTokenRecoveryPasswordDTO } from '../authenticate/dto/send-token-rec
       },
     }),
   ],
-  providers: [SendEmailNewUser, SendTokenRecoveryPasswordDTO],
-  exports: [SendEmailNewUser, SendTokenRecoveryPasswordDTO],
+  providers: [
+    SendEmailNewUser,
+    SendTokenRecoveryPasswordDTO,
+    SendEmailSucessRecoveryPassord,
+  ],
+  exports: [
+    SendEmailNewUser,
+    SendTokenRecoveryPasswordDTO,
+    SendEmailSucessRecoveryPassord,
+  ],
 })
 export class MailModule {}
