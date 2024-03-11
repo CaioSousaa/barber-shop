@@ -11,8 +11,8 @@ export class SendEmailTokenRecoveryPasswordUserService {
       .sendMail({
         to: user.email,
         from: 'No reply this email please' + process.env.MAIL_USER,
-        subject: `Use to change your password ${token}`,
-        template: 'sendToken',
+        subject: `Use to chan ge your password ${token}`,
+        template: './sendToken',
         context: {
           name: user.name,
           token: token,
