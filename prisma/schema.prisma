@@ -23,8 +23,8 @@ model User {
 
 model Appointment {
   id             Int @id @default(autoincrement())
-  startAt        String
-  endAt          String
+  startAt        DateTime
+  endAt          DateTime?
   userId         String
   payment        Int
   user           User @relation(fields: [userId], references: [id])
