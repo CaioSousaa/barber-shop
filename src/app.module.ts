@@ -9,9 +9,10 @@ import { MailModule } from './modules/mail/mail.module';
 import { AuthModule } from './modules/authenticate/authenticate.module';
 import { EnsureAuthenticateMidllwware } from './shared/http/middleware/ensure-authenticate-midlleware';
 import { EndModule } from './modules/endpoints/end.module';
+import { AppointmentModule } from './modules/appointment/appointment.module';
 
 @Module({
-  imports: [UserModule, MailModule, AuthModule, EndModule],
+  imports: [UserModule, MailModule, AuthModule, EndModule, AppointmentModule],
   controllers: [],
   providers: [],
 })

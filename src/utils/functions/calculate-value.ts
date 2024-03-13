@@ -1,6 +1,6 @@
 import { Cutting, DyeHair } from '@prisma/client';
 
-export function CalculateValue(
+export function calculateValue(
   cut?: Cutting,
   dye_hair?: DyeHair,
   eyebrows?: string,
