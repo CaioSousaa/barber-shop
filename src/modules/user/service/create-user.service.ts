@@ -37,8 +37,9 @@ export class CreateUserService {
         );
       }
 
-      const passwordHash: string =
-        await this.hashPassword.generateHash(password);
+      const passwordHash: string = await this.hashPassword.generateHash(
+        password,
+      );
 
       const user: User = await this.prisma.user.create({
         data: {
