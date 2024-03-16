@@ -26,6 +26,7 @@ export class AppModule implements NestModule {
         { path: '/user/:id', method: RequestMethod.DELETE },
         { path: '/authentiacte', method: RequestMethod.POST },
         { path: '/endpoint-user/list-clients', method: RequestMethod.GET },
+        { path: '/endpoint-appointmente', method: RequestMethod.GET },
       )
       .forRoutes('*');
   }
